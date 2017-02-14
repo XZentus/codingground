@@ -28,7 +28,7 @@
 	       (r (random 1.0))
 		   (n (if (< r change-probability)
 		          (int-char (+ 33 (random (- 127 33))))
-				  c)))
+                          c)))
 	  (setf (aref str1 i) c)
 	  (setf (aref str2 i) n)))
   (write-line "Test #1 verboze off")
