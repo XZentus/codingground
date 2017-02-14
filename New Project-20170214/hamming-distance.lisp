@@ -24,4 +24,3 @@
     (write-line str1)
     (write-line str2)
     (write-line (cdr result))))
-(test)
