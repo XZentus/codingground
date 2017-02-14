@@ -1,6 +1,6 @@
 #lang racket
 
-(define (hamming-distance str1 str2 [verboze #f])
+(define (hamming-distance str1 str2 [verbose #f])
   (let* ((distance 0)
          (l1 (string-length str1))
          (l2 (string-length str2))
@@ -13,7 +13,7 @@
        (if (char=? x y)
            (string-set! positions position #\ )
            (begin
-             (when verboze
+             (when verbose
                    (printf "At pos ~a: ~a <-> ~a~%" (add1 position) x y))
              (set! distance (add1 distance)))))
      (cons (+ distance diff) positions)))
@@ -34,11 +34,11 @@
                   c)))
       (string-set! str1 i c)
       (string-set! str2 i n)))
-  (displayln "Test #1 verboze off")
+  (displayln "Test #1 verbose off")
   (let ((result (hamming-distance str1 str2)))
     (printf "~%Hamming distance = ~a~%~%~a~%~a~%~a~%~%"
             (car result) str1 str2 (cdr result)))
-  (displayln "Test #2 verboze on")
+  (displayln "Test #2 verbose on")
   (let ((result (hamming-distance str1 str2 #t)))
     (printf "~%Hamming distance = ~a~%~%~a~%~a~%~a~%"
             (car result) str1 str2 (cdr result))))
