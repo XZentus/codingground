@@ -37,7 +37,10 @@
                     
   (define commands (file->lines ini-path))
   (parse commands)
+  ;(display (apply string-append log)))
   (message-box "Backup"
                (apply string-append log)
                #f
                '(ok no-icon)))
+
+(main)
