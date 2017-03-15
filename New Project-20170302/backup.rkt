@@ -30,17 +30,23 @@
 (define (main)
   (set! log '())
   (define command-line (current-command-line-arguments))
-  (define ini-path (str->path
-                    (if (= (vector-length command-line) 1)
-                        (vector-ref command-line 1)
-                        "bak.ini")))
-                    
-  (define commands (file->lines ini-path))
-  (parse commands)
-  ;(display (apply string-append log)))
-  (message-box "Backup"
-               (apply string-append log)
-               #f
-               '(ok no-icon)))
+  (define ini (str->path
+               (if (= (vector-length command-line) 1)
+                   (vector-ref command-line 0)
+                   "bak.ini")))
+  (cond
+    ((file-exists? ini)
+     (define commands (file->lines ini))
+     (parse commands)
+     ;(display (apply string-append log)))
+     (message-box "Backup"
+                  (apply string-append log)
+                  #f
+                  '(ok no-icon)))
+    (else
+     (message-box "Backup"
+                  (string-append "Файл не существует: " (path->string ini))
+                  #f
+                  '(ok stop)))))
 
 (main)
