@@ -34,10 +34,9 @@ struct neuron {
     };
 };
 
-int main()
-{
-    srand(time(0));
-    vector<vector<neuron>> net(3);
+typedef vector<vector<neuron>> net_t;
+
+void init_net(net_t& net) {
     net[0].emplace_back(2);
     net[0].emplace_back(2);
     
@@ -52,7 +51,9 @@ int main()
 
     net[0][1].inputs[0] = 0;
     net[0][1].inputs[1] = 1;
-    
+}
+
+void activate_net(net_t& net) {
     for(size_t layer = 0; layer < net.size(); layer += 1) {
         for(size_t nrn = 0; nrn < net[layer].size(); nrn += 1) {
             net[layer][nrn].activation();
@@ -60,6 +61,18 @@ int main()
                 net[layer + 1][next_layer_neuron].inputs[nrn] = net[layer][nrn].output;
         }
     }
+}
+
+void back_propagation(net_t& net, const vector<double> output_pattern) {
+    
+}
+
+int main()
+{
+    srand(time(0));
+    net_t net(3);
+    init_net(net);
+    activate_net(net);
     
     for(const auto& x: net[net.size() - 1])
         cout << x.output << endl;
